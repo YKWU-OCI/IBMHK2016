@@ -1,0 +1,58 @@
+doctype html
+html(lang="en", ng-app="app")
+	head
+		title= "Claim"
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+		script(src="js/angular.min.js")
+		script(src="js/jquery.min.js")
+		script(src="js/bootstrap.min.js")
+		script(src="js/app.js")
+		link(rel="stylesheet", href="css/bootstrap.min.css")
+		link(rel="stylesheet", href="css/style.css")
+		link(rel="stylesheet", href="css/font-awesome.min.css")
+	body(ng-controller="claimCtrl")
+		div(id="submitModal" class="modal fade bs-example-modal-lg" tableindex="-1" role="dialog")
+			div(class="modal-dialog")
+				div(class="modal-content")
+					div(class="modal-header")
+						h4(class="modal-title") Submitting to blockchain ...
+					div(class="modal-body")
+						h4 
+							| {{reminder}}
+							i(class="fa fa-spinner fa-pulse" ng-show="notClose")
+					div(class="modal-footer")
+						button(type="button", class="btn btn-default btn-md pull-right", data-dismiss="modal", ng-show="close", ng-click="resetButton()") Close
+		.container
+			h1.col-md-offset-2 Claim Form | #{company}
+		.container
+			.jumbotron.col-md-offset-2.col-md-8.col-xs-12
+				div(class="claim_form" my-enter="claim()")
+					.row
+						label.col-xs-3.col-form-label Customer Name
+						.col-xs-9
+							input.form-control(type="text" ng-model="name")
+					.row
+						label.col-xs-3.col-form-label HKID
+						.col-xs-9
+							input.form-control(type="text" ng-model="hkid")
+					.row
+						label.col-xs-3.col-form-label Receipt ID
+						.col-xs-9
+							input.form-control(type="text" ng-model="_id")
+					.row
+						label.col-xs-3.col-form-label Amount
+						.col-xs-9
+							.input-group
+								.input-group-addon $
+								input.form-control(type="number" ng-model="amount")
+					.row
+						label.col-xs-3.col-form-label Claim amount
+						.col-xs-9
+							.input-group
+								.input-group-addon $
+								input.form-control(type="number" ng-model="claim_amount")
+					.row
+						input.form-control(id="company" type="hidden" value="#{company}" readonly)
+					.row
+						button.btn.btn-primary.pull-right.col-md-3.col-xs-4(ng-click="claim()") Claim
